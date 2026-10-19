@@ -1,0 +1,8 @@
+[
+  { "id": 1, "nombre": "Palermo", "descripcion": "CABA" },
+  { "id": 2, "nombre": "Belgrano", "descripcion": "CABA" },
+  { "id": 3, "nombre": "Caballito", "descripcion": "CABA" },
+  { "id": 4, "nombre": "Flores", "descripcion": "CABA" },
+  { "id": 5, "nombre": "La Boca", "descripcion": "CABA" },
+  { "id": 6, "nombre": "Nunez", "descripcion": "CABA" }
+]

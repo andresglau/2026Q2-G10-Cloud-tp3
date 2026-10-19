@@ -1,0 +1,10 @@
+[
+  { "id": 1, "nombre": "Plomeria", "descripcion": "Canerias, grifos, perdidas de agua" },
+  { "id": 2, "nombre": "Electricidad", "descripcion": "Instalaciones, tableros, cortocircuitos" },
+  { "id": 3, "nombre": "Gas", "descripcion": "Estufas, calefones, perdidas de gas" },
+  { "id": 4, "nombre": "Carpinteria", "descripcion": "Muebles, puertas, ventanas" },
+  { "id": 5, "nombre": "Pintura", "descripcion": "Interiores y exteriores" },
+  { "id": 6, "nombre": "Albanileria", "descripcion": "Reparaciones de mamposteria y revoques" },
+  { "id": 7, "nombre": "Cerrajeria", "descripcion": "Cerraduras, llaves, aperturas" },
+  { "id": 8, "nombre": "Climatizacion", "descripcion": "Aires acondicionados y calefaccion" }
+]

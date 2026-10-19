@@ -82,14 +82,19 @@ jobs:
             terraform apply -auto-approve -input=false
           fi
 
-      - name: Terraform apply
+      - name: Terraform plan
         working-directory: terraform/organization
         run: |
           terraform init -input=false -backend-config="bucket=barriofix-tfstate-${ACCOUNT_ID}"
           terraform validate
-          # parallelism=1: crear las Lambdas de VPC de a una evita el timeout de ENIs del lab
-          terraform apply -auto-approve -input=false -parallelism=1 \
+          terraform plan -input=false -out=tfplan \
             -var "front_dist_path=${GITHUB_WORKSPACE}/front-src/dist"
+
+      - name: Terraform apply
+        working-directory: terraform/organization
+        # Aplica el plan ya guardado, asi se ejecuta exactamente lo planeado
+        # parallelism=1: crear las Lambdas de VPC de a una evita el timeout de ENIs del lab
+        run: terraform apply -input=false -parallelism=1 tfplan
 
       - name: Resumen
         working-directory: terraform/organization

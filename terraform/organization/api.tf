@@ -70,6 +70,8 @@ resource "aws_apigatewayv2_route" "callback" {
 
 # stage
 
+# Sin access logging, para esta entrega alcanzan los logs de las Lambdas (ver docs/arquitectura.md)
+#tfsec:ignore:aws-api-gateway-enable-access-logging
 resource "aws_apigatewayv2_stage" "default" {
   api_id      = aws_apigatewayv2_api.http.id
   name        = "$default"

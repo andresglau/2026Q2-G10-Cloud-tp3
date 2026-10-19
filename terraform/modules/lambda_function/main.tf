@@ -13,6 +13,8 @@ data "archive_file" "this" {
 }
 
 # Lo crea Terraform, no Lambda, para que el destroy lo elimine y no queden grupos huerfanos
+# Sin CMK propia, en el lab no creamos llaves KMS (ver docs/arquitectura.md)
+#tfsec:ignore:aws-cloudwatch-log-group-customer-key
 resource "aws_cloudwatch_log_group" "this" {
   name              = "/aws/lambda/${var.name}"
   retention_in_days = var.log_retention_days

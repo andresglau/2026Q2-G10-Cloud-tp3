@@ -3,6 +3,9 @@
 #   por_profesional -> solicitudes asignadas a un profesional (sparse)
 #   pendientes      -> trabajos disponibles por categoria (sparse)
 
+# Sin CMK propia ni point in time recovery, decisiones asumidas (ver docs/arquitectura.md)
+#tfsec:ignore:aws-dynamodb-table-customer-key
+#tfsec:ignore:aws-dynamodb-enable-recovery
 resource "aws_dynamodb_table" "this" {
   name         = var.project
   billing_mode = "PAY_PER_REQUEST"

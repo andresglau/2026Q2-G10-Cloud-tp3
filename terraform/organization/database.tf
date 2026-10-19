@@ -56,6 +56,11 @@ resource "aws_dynamodb_table" "this" {
     projection_type = "ALL"
   }
 
+  # Cifrado en reposo con la llave gestionada por AWS (no CMK propia)
+  server_side_encryption {
+    enabled = true
+  }
+
   # Desactivada a proposito para que terraform destroy pueda borrar la tabla
   deletion_protection_enabled = false
 

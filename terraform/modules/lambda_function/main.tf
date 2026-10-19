@@ -34,6 +34,11 @@ resource "aws_lambda_function" "this" {
   # Tope de instancias en paralelo para que un flood a una funcion no agote los 400 de la cuenta, -1 no reserva
   reserved_concurrent_executions = var.reserved_concurrency
 
+  # Trazas de X-Ray para observabilidad
+  tracing_config {
+    mode = "Active"
+  }
+
   # Entra a la VPC solo si se pasa vpc_config, si no corre fuera
   dynamic "vpc_config" {
     for_each = var.vpc_config != null ? [var.vpc_config] : []

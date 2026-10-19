@@ -95,4 +95,11 @@ No incorporamos WAF. Solo se puede asociar a una REST API o a CloudFront, no a u
 y CloudFront no está disponible en el lab, así que usarlo obligaría a pasar la API a REST API
 sin un beneficio claro en una API sin SQL ni render de HTML. Queda anotado como mejora futura.
 
+Algunas cosas que marca el análisis estático (el tfsec del template) quedan así a propósito. El
+bucket del frontend es público, porque sirve el sitio estático, con una bucket policy que solo
+permite GetObject y nada de escrituras ni listado. El costo es que no tiene HTTPS directo (por eso
+el callback de Cognito pasa por API Gateway) ni CDN adelante. El versionado de ese bucket está
+apagado porque el sitio se reconstruye entero en cada deploy y las versiones viejas del build no
+aportan. DynamoDB y S3 se cifran en reposo con llaves gestionadas por AWS en lugar de CMK propias, sin el costo ni la operación de mantener KMS propio.
+
 El detalle de Terraform (módulos, funciones, meta-argumentos y state) está en el README.

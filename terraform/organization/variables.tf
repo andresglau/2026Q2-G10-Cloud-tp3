@@ -8,18 +8,35 @@ variable "project" {
   description = "Prefijo de nombres y tag comun de todos los recursos"
   type        = string
   default     = "barriofix"
+
+  # Va en nombres de bucket, asi que tiene que cumplir las reglas de S3
+  validation {
+    condition     = can(regex("^[a-z0-9-]+$", var.project))
+    error_message = "project solo puede tener minusculas, numeros y guiones."
+  }
 }
 
 variable "vpc_cidr" {
   description = "Bloque CIDR de la VPC"
   type        = string
   default     = "10.0.0.0/16"
+
+  validation {
+    condition     = can(cidrhost(var.vpc_cidr, 0))
+    error_message = "vpc_cidr tiene que ser un bloque CIDR IPv4 valido."
+  }
 }
 
 variable "azs" {
   description = "Letras de las Availability Zones a usar (se anteponen a la region)"
   type        = list(string)
   default     = ["a", "b"]
+
+  # Dos AZs como minimo, las subredes privadas van una por AZ
+  validation {
+    condition     = length(var.azs) >= 2
+    error_message = "Hacen falta al menos 2 Availability Zones."
+  }
 }
 
 variable "lab_role_name" {
@@ -57,12 +74,22 @@ variable "lambda_memory" {
   description = "Memoria (MB) de las Lambdas de API"
   type        = number
   default     = 1024
+
+  validation {
+    condition     = var.lambda_memory >= 128 && var.lambda_memory <= 10240
+    error_message = "lambda_memory tiene que estar entre 128 y 10240 MB."
+  }
 }
 
 variable "lambda_timeout" {
   description = "Timeout (s) de las Lambdas de API"
   type        = number
   default     = 15
+
+  validation {
+    condition     = var.lambda_timeout >= 1 && var.lambda_timeout <= 900
+    error_message = "lambda_timeout tiene que estar entre 1 y 900 segundos."
+  }
 }
 
 variable "api_throttle_rate" {

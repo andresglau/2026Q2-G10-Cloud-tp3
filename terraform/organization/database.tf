@@ -150,7 +150,7 @@ resource "aws_dynamodb_table_item" "perfil_demo" {
     },
     # Atributos solo de profesional
     { for k in(local.demo_users[each.key].rol == "PROFESIONAL" ? ["disponible"] : []) : k => { BOOL = true } },
-    { for k in(local.demo_users[each.key].rol == "PROFESIONAL" ? ["descripcion"] : []) : k => { S = "Profesional de demo" } },
+    { for k in(local.demo_users[each.key].rol == "PROFESIONAL" ? ["descripcion"] : []) : k => { S = local.demo_users[each.key].descripcion } },
     { for k in(local.demo_users[each.key].rol == "PROFESIONAL" ? ["categorias"] : []) : k => { NS = [for c in local.demo_users[each.key].categorias : tostring(c)] } },
   ))
 

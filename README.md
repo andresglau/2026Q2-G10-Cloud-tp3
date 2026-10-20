@@ -57,8 +57,12 @@ El despliegue es con GitHub Actions
 3. Al terminar, el resumen del run muestra la URL del sitio, de la API y del login
 4. Para bajar todo, el workflow Destroy (pide escribir `destroy` para confirmar)
 
-Usuarios de demo, creados por Terraform: `cliente.demo`, `plomero.demo` y
-`electricista.demo`, con contraseña `BarrioFix-Demo-2026!`.
+Usuarios de demo, creados por Terraform, todos con contraseña `BarrioFix-Demo-2026!`:
+
+- Clientes: `juan.perez`, `sofia.garcia`, `martin.lopez`, `valentina.romero`,
+  `lucas.fernandez`.
+- Profesionales: `carlos.electricista`, `diego.plomero`, `mariano.gasista`,
+  `pablo.pintor`, `federico.tecnico`.
 
 ## Infraestructura como código
 

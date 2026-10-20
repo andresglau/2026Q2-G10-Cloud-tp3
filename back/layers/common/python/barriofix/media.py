@@ -11,7 +11,7 @@ from barriofix import config
 
 _s3 = boto3.client("s3", region_name=config.REGION)
 
-MAX_BYTES = 5 * 1024 * 1024  # 5 MB por foto
+MAX_BYTES = 15 * 1024 * 1024  # 15 MB por foto (las fotos de celular suelen pasar los 5 MB)
 
 
 def presigned_post(key: str, metadata: dict, expires: int = 300) -> dict:

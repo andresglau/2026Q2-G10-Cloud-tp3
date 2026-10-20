@@ -51,11 +51,22 @@ El despliegue es con GitHub Actions
 
 1. Cargar en el repo los secrets `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` y
    `AWS_SESSION_TOKEN`
-2. Mergear a main, o correr el workflow Deploy a mano. El workflow compila el front, arma
+
+   ![Secrets del repo](docs/img/secrets.png)
+
+2. Abrir un Pull Request con los cambios. Corren los checks de validación (formato,
+   `terraform validate`, análisis de seguridad y build del front) sin tocar AWS
+
+   ![Checks del PR](docs/img/pr-checks.png)
+
+3. Mergear a main, o correr el workflow Deploy a mano. El workflow compila el front, arma
    el layer, crea el bucket del state si falta y hace `terraform apply`. El primer apply
    tarda entre 15 y 30 minutos
-3. Al terminar, el resumen del run muestra la URL del sitio, de la API y del login
-4. Para bajar todo, el workflow Destroy (pide escribir `destroy` para confirmar)
+4. Al terminar, el resumen del run muestra la URL del sitio, de la API y del login
+
+   ![Resumen del deploy](docs/img/deploy-summary.webp)
+
+5. Para bajar todo, el workflow Destroy (pide escribir `destroy` para confirmar)
 
 Usuarios de demo, creados por Terraform, todos con contraseña `BarrioFix-Demo-2026!`:
 

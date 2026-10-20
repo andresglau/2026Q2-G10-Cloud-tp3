@@ -49,7 +49,8 @@ output "frontend_url" {
 }
 
 output "vpc_id" {
-  value = module.vpc.vpc_id
+  description = "ID de la VPC que crea el modulo externo"
+  value       = module.vpc.vpc_id
 }
 
 output "app_subnet_ids" {
@@ -58,5 +59,6 @@ output "app_subnet_ids" {
 }
 
 output "lambda_security_group_id" {
-  value = aws_security_group.lambda.id
+  description = "Security group de las Lambdas que van dentro de la VPC"
+  value       = aws_security_group.lambda.id
 }

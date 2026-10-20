@@ -8,10 +8,11 @@ resource "aws_s3_object" "config" {
   content_type  = "application/json"
   cache_control = "no-cache"
   content = jsonencode({
-    apiUrl          = aws_apigatewayv2_api.http.api_endpoint
-    cognitoDomain   = "${local.cognito_domain_prefix}.auth.${var.region}.amazoncognito.com"
-    cognitoClientId = aws_cognito_user_pool_client.web.id
-    region          = var.region
+    apiUrl           = aws_apigatewayv2_api.http.api_endpoint
+    cognitoDomain    = "${local.cognito_domain_prefix}.auth.${var.region}.amazoncognito.com"
+    cognitoClientId  = aws_cognito_user_pool_client.web.id
+    region           = var.region
+    googleMapsApiKey = var.google_maps_api_key
   })
 }
 

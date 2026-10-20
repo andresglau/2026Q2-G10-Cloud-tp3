@@ -115,3 +115,10 @@ variable "auth_callback_reserved_concurrency" {
   type        = number
   default     = 10
 }
+
+variable "google_maps_api_key" {
+  # Key publica: el navegador la recibe igual en config.json, no es un secreto
+  description = "API key de Google Maps para el mapa de ubicacion del front. Vacia = el front muestra solo la direccion"
+  type        = string
+  default     = "AIzaSyC3MJ0gk1o-X1_JC8BtwuXEPOMLbO85-OM"
+}

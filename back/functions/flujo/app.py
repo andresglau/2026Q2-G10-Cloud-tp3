@@ -23,13 +23,10 @@ app = crear_app()
 @app.post("/api/solicitudes/<id_sol>/aceptar")
 def aceptar(id_sol: str, datos: TransicionIn):
     sub, perfil = _profesional()
-    meta = _meta(id_sol)
-
-    # El profesional solo toma trabajos de sus categorias (no es una carrera,
-    # va como chequeo previo; la condicion atomica es sobre el estado)
-    cats = {int(c) for c in perfil.get("categorias", [])}
-    if int(meta["id_categoria"]) not in cats:
-        raise ServiceError(403, "La solicitud no es de una de tus categorias")
+    # Un profesional puede tomar cualquier trabajo pendiente, sea o no de sus
+    # categorias. Solo validamos que exista (404), la condicion atomica sobre el
+    # estado resuelve la concurrencia
+    _meta(id_sol)
 
     quien = {"id_usuario": sub, "nombre": perfil["nombre"], "apellido": perfil["apellido"]}
     return _aplicar(

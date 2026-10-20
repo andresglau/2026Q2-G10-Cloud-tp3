@@ -42,6 +42,8 @@ resource "aws_dynamodb_table_item" "solicitud" {
       # Mapa vacio: foto_subida hace SET fotos.<id> y necesita el padre
       fotos = { M = {} }
     },
+    # Pin del mapa, solo si el seed lo trae
+    { for k in(try(each.value.lat, null) != null ? ["lat", "lng"] : []) : k => { N = tostring(each.value[k]) } },
     # Entra al GSI de pendientes solo mientras esta PENDIENTE
     { for k in(each.value.estado == "PENDIENTE" ? ["pendiente_categoria"] : []) : k => { N = tostring(each.value.id_categoria) } },
     # Profesional asignado (tambien lo deja en el GSI por_profesional)

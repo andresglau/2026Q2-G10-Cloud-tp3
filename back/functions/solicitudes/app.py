@@ -4,6 +4,7 @@ Las transiciones de estado (aceptar, iniciar, etc.) viven en el dominio flujo.
 """
 
 from datetime import datetime, timezone
+from decimal import Decimal
 
 from aws_lambda_powertools import Logger
 from aws_lambda_powertools.event_handler.exceptions import (
@@ -99,6 +100,10 @@ def crear(datos: SolicitudIn):
         "cancelada_por_cliente": False,
         "fotos": {},  # mapa vacio: foto_subida hace SET fotos.<id> y necesita el padre
     }
+    if datos.lat is not None:
+        # DynamoDB no acepta float, va como Decimal
+        meta["lat"] = Decimal(str(datos.lat))
+        meta["lng"] = Decimal(str(datos.lng))
     seg = {
         "PK": f"SOL#{id_sol}", "SK": f"SEG#{ulid()}",
         "estado": reglas.PENDIENTE,

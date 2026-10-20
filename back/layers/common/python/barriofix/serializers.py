@@ -42,6 +42,8 @@ def solicitud_out(item: dict) -> dict:
         "titulo": item["titulo"],
         "descripcion": item["descripcion"],
         "direccion": item["direccion"],
+        "lat": float(item["lat"]) if "lat" in item else None,
+        "lng": float(item["lng"]) if "lng" in item else None,
         "fecha_creacion": item["fecha_creacion"],
         "cancelada_por_cliente": bool(item.get("cancelada_por_cliente", False)),
         "fecha_cancelacion_cliente": item.get("fecha_cancelacion_cliente"),

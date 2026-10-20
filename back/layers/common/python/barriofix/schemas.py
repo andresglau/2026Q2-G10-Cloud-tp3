@@ -6,7 +6,7 @@ consume el front.
 
 from typing import List, Literal, Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 
 
 class RegistroIn(BaseModel):
@@ -25,6 +25,15 @@ class SolicitudIn(BaseModel):
     id_categoria: int
     id_urgencia: int
     id_zona: int
+    # Pin opcional del mapa. Van juntas o ninguna
+    lat: Optional[float] = Field(default=None, ge=-90, le=90)
+    lng: Optional[float] = Field(default=None, ge=-180, le=180)
+
+    @model_validator(mode="after")
+    def _ubicacion_completa(self):
+        if (self.lat is None) != (self.lng is None):
+            raise ValueError("lat y lng van juntas")
+        return self
 
 
 class TransicionIn(BaseModel):

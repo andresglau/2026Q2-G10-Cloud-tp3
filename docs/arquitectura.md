@@ -36,8 +36,8 @@ pasos: la cuenta se crea en la Hosted UI y el perfil (nombre, rol, categorías) 
 una llamada a la API la primera vez que el usuario entra.
 
 Las fotos no pasan por la API. El backend firma una URL y el navegador sube o baja el archivo
-directo a S3. Antes de subirla, el navegador comprime la foto, y el backend acepta hasta 15 MB
-por foto. El mapa de cada solicitud lo dibuja el navegador con Google Maps, usando la key que
+directo a S3. Antes de subirla, el navegador achica y comprime la foto, así que llega con unos
+cientos de KB; el backend igual acepta hasta 50 MB por foto, como resguardo. El mapa de cada solicitud lo dibuja el navegador con Google Maps, usando la key que
 Terraform pone en el config.json; si no hay key, se muestra solo la dirección.
 
 Hay dos Lambdas que no se llaman por HTTP sino que las dispara otro servicio. Cognito invoca a

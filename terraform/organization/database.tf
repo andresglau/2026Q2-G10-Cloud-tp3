@@ -40,23 +40,44 @@ resource "aws_dynamodb_table" "this" {
 
   global_secondary_index {
     name            = "por_cliente"
-    hash_key        = "id_cliente"
-    range_key       = "id_solicitud"
     projection_type = "ALL"
+
+    key_schema {
+      attribute_name = "id_cliente"
+      key_type       = "HASH"
+    }
+    key_schema {
+      attribute_name = "id_solicitud"
+      key_type       = "RANGE"
+    }
   }
 
   global_secondary_index {
     name            = "por_profesional"
-    hash_key        = "id_profesional"
-    range_key       = "id_solicitud"
     projection_type = "ALL"
+
+    key_schema {
+      attribute_name = "id_profesional"
+      key_type       = "HASH"
+    }
+    key_schema {
+      attribute_name = "id_solicitud"
+      key_type       = "RANGE"
+    }
   }
 
   global_secondary_index {
     name            = "pendientes"
-    hash_key        = "pendiente_categoria"
-    range_key       = "id_solicitud"
     projection_type = "ALL"
+
+    key_schema {
+      attribute_name = "pendiente_categoria"
+      key_type       = "HASH"
+    }
+    key_schema {
+      attribute_name = "id_solicitud"
+      key_type       = "RANGE"
+    }
   }
 
   # Cifrado en reposo con la llave gestionada por AWS (no CMK propia)

@@ -92,8 +92,10 @@ terraform output
 
 El bootstrap se corre una sola vez por cuenta. Se usa parallelism=1 por el lab, si se crean
 varias Lambdas dentro de la VPC al mismo tiempo, la creación de las interfaces de red suele dar
-timeout. Para destruir hay que vaciar primero los buckets de frontend y media (el provider que
-usamos para S3 no los vacía solo) y después correr terraform destroy -parallelism=1.
+timeout. Para destruir hay que vaciar primero los buckets de frontend y media, porque el provider
+que usamos para S3 no los vacía solo. Media tiene versionado, así que además de los archivos hay
+que borrar las versiones viejas; .github/scripts/vaciar-bucket.sh hace las dos cosas. Después se
+corre terraform destroy -parallelism=1.
 
 ## Terraform
 
